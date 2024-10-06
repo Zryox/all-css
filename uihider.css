@@ -1,0 +1,60 @@
+let elemIds = [
+    "healthContainer",
+    "egg-breaker-wrap",
+    "reticleDot",
+    "reticleContainer",
+    "grenadeThrowContainer",
+    "captureIconWrap",
+    "captureContainer",
+    "teamScores",
+    "spatulaPlayer",
+    "cts-message",
+    "weaponBox",
+    "account_panel",
+    "chatIn",
+    "chatOut",
+    "playerList",
+    "bigMessageContainer",
+    "gameMessage",
+    "kill-death-box",
+    "inGameUI",
+    "killTicker",
+    "shellStreakContainer",
+    "spectate",
+    "chickenBadge"
+];
+
+let hideHUDInterval = setInterval(() => {
+    if (typeof vueApp === "undefined") return;
+    
+    clearInterval(hideHUDInterval);
+    
+    // Modify localization settings
+    let oldLocFunc = vueApp.setLocData;
+    vueApp.setLocData = (languageCode, newLocData) => {
+        oldLocFunc(languageCode, newLocData);
+        vueApp.loc.keybindings_toggle_hud = "Toggle HUD";
+    }
+
+    // Add toggle functionality to keybindings
+    vueApp.settingsUi.controls.keyboard.spectate.push({
+        id: 'toggle_hud',
+        locKey: 'keybindings_toggle_hud',
+        value: 'H'
+    });
+
+    // Event listener for hiding/showing UI
+    document.addEventListener('keydown', (event) => {
+        if (document.activeElement.tagName === "INPUT" || !extern.inGame || vueApp.game.isPaused) return;
+
+        let hideKey = vueApp.settingsUi.controls.keyboard.spectate.find(item => item.id === "toggle_hud").value.toLowerCase();
+        if (event.key === hideKey) {
+            elemIds.forEach(id => {
+                let element = document.getElementById(id);
+                if (element) {
+                    element.style.opacity = element.style.opacity == 0 ? 1 : 0; // Toggle visibility
+                }
+            });
+        }
+    });
+}, 250);
