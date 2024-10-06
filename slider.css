@@ -1,0 +1,62 @@
+:root {
+    --slider-color: hsl(180, 100%, 50%);
+    --slider-lock-pos: 0.13em; /* -14.53em to 14.79em */
+}
+
+.color-slider {
+    height: 3.4em;
+}
+
+.color-slider input[type='range'] {
+    -webkit-appearance: none; /* Override default styles */
+    appearance: none; /* Override default styles */
+    background: transparent; /* Transparent background */
+    cursor: pointer; /* Cursor style */
+    width: 100%; /* Full width */
+    margin-top: 2em; /* Top margin */
+}
+
+.color-slider input[type='range']::-webkit-slider-runnable-track {
+    background: conic-gradient(
+        red, yellow, lime, cyan, blue, magenta, red
+    ); /* Create a color wheel gradient */
+    height: 1em; /* Track height */
+    border-radius: 1em; /* Rounded edges */
+    border: 0.2em solid var(--ss-blue3); /* Border styling */
+}
+
+.color-slider input[type='range']:disabled {
+    filter: grayscale(0.8); /* Grayscale when disabled */
+}
+
+.color-slider input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default styles */
+    appearance: none; /* Override default styles */
+    width: 1.75em; /* Thumb width */
+    height: 1.75em; /* Thumb height */
+    border-width: 0.2em; /* Border width */
+    border-radius: 85% 25% 55% 50% / 55% 25% 85% 50%; /* Rounded thumb */
+    transform: rotate(-45deg); /* Rotate thumb */
+    background: var(--slider-color) !important; /* Slider color */
+    margin-top: -0.5em; /* Position adjustment */
+}
+
+.egg-color-select {
+    margin-bottom: calc(var(--ss-space-lg)) !important; /* Bottom margin */
+}
+
+.screen-skins #equip_weapon_panel {
+    bottom: 5.2em !important; /* Position adjustment */
+}
+
+.slider-lock {
+    font-size: 0.9em !important; /* Font size */
+    color: white; /* Text color */
+    position: relative; /* Positioning */
+    bottom: 1.7em; /* Position adjustment */
+    left: var(--slider-lock-pos); /* Lock position */
+}
+
+.paper-doll-click-container {
+    top: 25em !important; /* Position adjustment */
+}
